@@ -1,4 +1,4 @@
-# Cloud Data Warehouse with Amazzon Redshift 
+# Cloud Data Warehouse with Amazon Redshift 
 
 ### Summary
 
