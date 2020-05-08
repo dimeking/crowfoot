@@ -67,6 +67,8 @@ time_table_create = ("""CREATE TABLE IF NOT EXISTS times \
 (start_time bigint PRIMARY KEY, dt DATE NOT NULL, hour smallint NOT NULL, day smallint NOT NULL, \
 week smallint NOT NULL, month smallint NOT NULL, year smallint NOT NULL, weekday boolean NOT NULL) \
 SORTKEY(start_time)""")
+
+
 ## STAGING TABLES
 
 # copy raw data from song_data JSON files on S3 onto staging_songs_table 
@@ -74,7 +76,6 @@ staging_songs_copy = ("""COPY staging_songs_table FROM {}
     CREDENTIALS 'aws_iam_role={}'
     JSON 'auto'
     REGION '{}'
-    COMPUPDATE OFF 
 """).format(SONG_DATA, IAM_ROLE_ARN, REGION)
 
 # copy raw data from log_data JSON files on S3 onto staging_events_table 
@@ -83,7 +84,6 @@ staging_events_copy = """
     CREDENTIALS 'aws_iam_role={}'
     JSON {}
     REGION '{}'
-    COMPUPDATE OFF 
 """.format(LOG_DATA, IAM_ROLE_ARN, LOG_JSONPATH, REGION)
 
 ## FINAL TABLES
